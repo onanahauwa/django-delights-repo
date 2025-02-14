@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Purchases - Django Delights{% endblock %}
+
+{% block content %}
+    <h2 class="text-center">Purchases</h2>
+    <br/>
+    <a href="{% url 'create_purchase' %}"><button class="btn btn-primary" id="toggleFormBtn">Record New Purchase</button></a>
+    <br/>
+    <br/>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Menu Item</th>
+                <th>Price</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in purchased_items %}
+            <tr>
+                <td>{{ item.menu_item.name }}</td>
+                <td>${{ item.menu_item.price }}</td>
+                <td>{{ item.timestamp }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No items in inventory</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

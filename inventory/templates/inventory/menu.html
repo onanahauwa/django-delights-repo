@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Menu - Django Delights{% endblock %}
+
+{% block content %}
+    <a href="{% url 'create_menu' %}"><button class="btn btn-primary" id="toggleFormBtn">Add New Menu</button></a>
+    <a href="{% url 'create_recipe' %}"><button class="btn btn-primary" id="toggleFormBtn">Add New Recipe</button></a>
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center">
+            {% for item in menus %}
+            <div class="col mb-5 d-flex justify-content-center">
+                <div class="card h-100 w-75 p-3 shadow">
+                    <div class="card-body">
+                        <!-- Menu Header: Name (Left) & Price (Right) -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'update_menu' item.id %}"><h5 class="fw-bolder text-start">{{ item.name }}</h5></a>
+                            <p class="text-end mb-0" ><strong>${{ item.price }}</strong></p>
+                        </div>
+
+                        <!-- Recipe Requirements -->
+                        <hr>
+                        <h6 class="fw-bold">Recipe Requirements:</h6>
+                        <ul class="list-styled">
+                            {% for requirement in item.recipe_requirements.all %}
+                            <a href="{% url 'recipe_requirements' item.id %}"><li>{{ requirement.quantity_required }} {{ requirement.ingredient.unit }} of {{ requirement.ingredient.name }}</li></a>
+                            {% empty %}
+                                <li>No recipe requirements listed.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>  
+{% endblock %}

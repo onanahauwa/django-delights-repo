@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Ingredients - Django Delights{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Ingredients List</h1>
+    <br/>
+    <a href="{% url 'create_ingredient' %}"><button class="btn btn-primary" id="toggleFormBtn">Add New Ingredient</button></a>
+    <br/>
+    <br/>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td><a href="{% url 'update_ingredient' item.id %}" >{{ item.name }} </a></td>
+                <td>{{ item.quantity_available }}</td>
+                <td>{{ item.unit }}</td>
+                <td>${{ item.price_per_unit }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No items in inventory</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

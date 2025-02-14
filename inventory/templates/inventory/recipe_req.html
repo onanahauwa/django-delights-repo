@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Recipe Requirements - {{ menu_item.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">.
+    <h2>Recipe Requirements for {{ menu_item.name }}</h2>
+    <br/>
+    <br/>
+    <br/>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Menu Item</th>
+                <th>Quantity Required</th>
+                <th>Unit</th>
+                <th>Ingredient Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in recipe_requirement %}
+            <tr>
+                <td>{{ menu_item.name }}</td>
+                <td>{{ item.quantity_required }}</td>
+                <td>{{ item.ingredient.unit }}</td>
+                <td>{{ item.ingredient.name}}</td>
+                <td><a href="{% url 'delete_recipe' item.pk %}" class="btn btn-danger btn-sm">
+                    <i class="bi bi-trash"></i> Delete</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No recipe available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br/>
+    <a href="{% url 'menu' %}" class="btn btn-primary">Back to Menu</a>
+</div>
+<br/>
+{% endblock %}
