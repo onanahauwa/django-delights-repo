@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-!i)8a!g-*li(vende08zi1mb=t+l#ctes0#nsilge@^h)#i$6%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["https://django-delights-inventory-tracker.onrender.com",
+                 "127.0.0.1",
+                 ]
 
 
 # Application definition
